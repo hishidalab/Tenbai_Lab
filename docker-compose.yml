@@ -1,0 +1,31 @@
+version: '3'
+services:
+  app:
+    container_name: app
+    build:
+      context: ./app
+      dockerfile: Dockerfile
+    volumes:
+      - ./app/source:/django
+    ports:
+      - "8888:8888"
+    tty: true
+    stdin_open: true
+  db:
+    image: mysql:5.7
+    build: ./docker/mysql
+    platform: linux/amd64
+    container_name: mysql
+    volumes:
+      - dbdata:/var/lib/mysql
+      - ./init.d:/docker-entrypoint-initdb.d 
+    ports:
+      - "3307:3306"
+    expose:
+      - "3307"
+    restart: always
+    environment:
+      MYSQL_DATABASE: 'django'
+      MYSQL_ROOT_PASSWORD: "hoge"
+volumes:
+  dbdata:
