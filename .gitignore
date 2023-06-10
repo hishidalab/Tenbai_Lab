@@ -1,4 +1,10 @@
 settings_local.py
 db.sqlite3
+__pycache__
 # dbdata
 # db.sqlite3
+*.log
+*.pyc
+__pycache__/
+db-volumes/
+db.sqlite3
