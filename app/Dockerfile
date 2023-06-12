@@ -3,6 +3,7 @@ ENV PYTHONBURRERED=1
 WORKDIR /django
 RUN pip install --upgrade pip
 RUN pip install django-allauth
+RUN pip install Pillow
 RUN apt-get update && \
     apt-get -y install gcc libmariadb-dev mariadb-client
 COPY requirements.txt requirements.txt
