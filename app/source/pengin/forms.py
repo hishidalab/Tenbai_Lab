@@ -10,6 +10,10 @@ class ImageUploadForm(forms.ModelForm):
         model = ImageUpload
         fields = "__all__"
 
+class LoginForm(AuthenticationForm):
+    fields = {'loginID','password'}
+    labels = {'loginID':"ログインID",'password':"パスワード"}
+
 class UserForm(forms.ModelForm):
     class Meta():
         model = User
@@ -19,7 +23,7 @@ class UserForm(forms.ModelForm):
         labels = {'username': "ユーザーネーム",
                 'loginID': "ログインID", 'password': "パスワード"}
         
-class LoginForm(AuthenticationForm):
-    print("formです")
-    fields = {'loginID','password'}
-    labels = {'loginID':"ログインID",'password':"パスワード"}
+
+# class LoginForm(AuthenticationForm):
+#     class Meta:
+#         fields = "__all__"

@@ -9,11 +9,11 @@
     <div class="pt-4"></div>
         <form action="{% url 'pengin:login' %}" method="POST">
         {% csrf_token %}
-            
-            <div class="pt-5">{{ form.as_p }}</div>
-            <div class="col-4"><p><input type="submit" value="ログイン"></p></div>
-            
+            <p><input type="hidden" name="next" value="{{next}}"></p>
+            {{ form.as_p }}
+            <p><input type="submit" value="ログイン"></p>
         </form>
         <p>新規登録は<a href="{% url 'pengin:signup' %}">こちら</a></p>
+        {{ form.management_form }}
     </body>
 </html>

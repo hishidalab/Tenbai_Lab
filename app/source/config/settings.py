@@ -132,6 +132,20 @@ STATICFILES_DIRS = [BASE_DIR / "static_local" ]
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / "media_local"
 
+# ログイン用設定
+
+AUTH_USER_MODEL = 'pengin.User'
+
+LOGIN_URL = 'pengin:login' 
+LOGIN_REDIRECT_URL = 'pengin:signup'
+LOGOUT_REDIRECT_URL='pengin:login'
+
+ACCOUNT_USER_MODEL_USERNAME_FIELD = None
+ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_AUTHENTICATION_METHOD = 'loginID'
+ACCOUNT_LOGINID_REQUIRED = True
+APPEND_SLASH = False
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 

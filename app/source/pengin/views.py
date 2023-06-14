@@ -34,23 +34,19 @@ def loginDataView(request):
     print(request.method)
     # ↑GET
     if request.method == 'POST':
-        # print(LoginForm(request, data=request.POST))
+        next = request.POST.get('next')
         form = LoginForm(request, data=request.POST)
-        print(form)
-        # form = LoginForm(request, data=request.POST)
-        print(form)
         if form.is_valid():
             print('成功')
             user = form.get_user()
             if user:
                 login(request, user)
-            return render(request, 'back/home.html', {})
+            return render(request, 'pengin/test.html', {})
         else:
             print('そんな値はないです')
             for ele in form :
                 print(ele)
     else:
-
         form = LoginForm()
 
     return render(request, 'pengin/login.html', {'form': form})
