@@ -1,16 +1,18 @@
 version: '3'
 services:
-  app:
-    container_name: app
-    build:
-      context: ./app
-      dockerfile: Dockerfile
-    volumes:
-      - ./app/source:/django
-    ports:
-      - "8888:8888"
-    tty: true
-    stdin_open: true
+  # app:
+  #   container_name: app
+  #   build:
+  #     context: ./app
+  #     dockerfile: Dockerfile
+  #   volumes:
+  #     - ./app/source:/django
+  #   ports:
+  #     - "8888:8888"
+  #   tty: true
+  #   stdin_open: true
+  #   depends_on:
+  #     - db
 
   db:
     build:
@@ -18,7 +20,7 @@ services:
       dockerfile: Dockerfile
     volumes:
       - ./docker/mysql/data:/var/lib/mysql
-      - ./init.d:/docker-entrypoint-initdb.d 
+      - ./init.d:/docker-entrypoint-initdb.d
     ports:
       - "3306:3306"
     environment:
