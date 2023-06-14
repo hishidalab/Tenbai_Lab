@@ -21,7 +21,7 @@ def signupDetaView(request):
             question.set_password(form.cleaned_data["password"])
             question.save()
 
-            return render(request, 'pengin/login.html', {})
+            return render(request, 'pengin/signup_check.html', {})
     
     else: #初回アクセス時…空のフォームがほしいとき
 
@@ -50,3 +50,6 @@ def loginDataView(request):
         form = LoginForm()
 
     return render(request, 'pengin/login.html', {'form': form})
+
+def signupCheckView(request):
+    return render(request, 'pengin/signup_check.html')
