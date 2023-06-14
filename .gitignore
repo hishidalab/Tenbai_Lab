@@ -4,5 +4,9 @@ settings_local.py
 *.log
 *.pyc
 __pycache__/
+app/source/config/__pycache__
+app/source/pengin/__pycache__
 db-volumes/
 db.sqlite3
+docker/mysql/data
+mysql
