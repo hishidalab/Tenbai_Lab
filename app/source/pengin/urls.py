@@ -7,4 +7,6 @@ from django.views import View
 app_name = "pengin"
 urlpatterns = [
     path("test/", testView, name='test'),
+    path('signup/', signupDetaView, name='signup'),
+    path('login/', loginDataView, name='login'),
 ]
