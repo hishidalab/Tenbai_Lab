@@ -4,6 +4,9 @@ from .forms import ImageUploadForm, UserForm, LoginForm
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
+from django.views.generic.edit import CreateView
+from django.shortcuts import render, redirect
+from django.views import View
 
 def testView(request):
     return render(request, 'pengin/test.html')
@@ -53,3 +56,74 @@ def loginDataView(request):
 
 def signupCheckView(request):
     return render(request, 'pengin/signup_check.html')
+
+
+# def productRegistraView(request):
+#     print(request.method)
+#     if request.method == 'POST':
+#         form = ImageUploadForm(request.POST)
+#         context = {
+#             'form': form,
+#         }
+#         if form.is_valid():  # フォームの値が正しい時
+#             imgup = ImageUpload()
+#             # 'name','mainimg','img1','img2','img3',''
+#             imgup.name = request.POST['name']
+#             imgup.mainimg = request.POST['mainimg']
+#             imgup.img1 = request.POST['img1']
+#             imgup.img2 = request.POST['img2']
+#             imgup.img3 = request.POST['img3']
+#             imgup.user = request.user
+#             imgup.save()
+#             return render('pengin/test.html')
+#     else:
+#         form = ImageUploadForm()
+#         context = {
+#             'form': form,
+#         }
+            
+#     return render(request, 'pengin/product_registra.html', context)
+
+# class productRegistraView(CreateView):
+#     template_name = "pengin/product_registra.html"
+#     form_class = ImageUploadForm
+
+#     def post(self, request):
+#         if request.method == 'POST':
+#             form = ImageUploadForm(request.POST)
+#             if form.is_valid():
+#                 form = form.save(commit=False)
+#                 form.user = request.user
+#                 form.save()
+#                 return render(request, 'pengin/test.html')
+#             else:
+#                 return HttpResponse("フォームが無効です。")  # 無効なフォームの場合の処理
+#         else:
+#             return HttpResponse("無効なリクエストメソッドです。")  # POST 以外のリクエストメソッドの場合の処理
+
+class ImageUploadView(View):
+    template_name = 'pengin/product_registra.html'
+
+    def get(self, request):
+        form = ImageUploadForm()
+        return render(request, self.template_name, {'form': form})
+
+    def post(self, request):
+        form = ImageUploadForm(request.POST, request.FILES)
+        if form.is_valid():
+            image_upload = form.save(commit=False)
+            image_upload.user = request.user
+            image_upload.save()
+            return redirect('test')  # 保存成功後にリダイレクトするURLを指定してください
+        return render(request, self.template_name, {'form': form})
+    
+def HomeListView(request):
+    template_name = "pengin/home.html"
+    sample_users = User.objects.values('id', 'name')
+    img_list = ImageUpload.objects.values('id','name','mainimg','img1','img2','img3','user')
+    context = {
+        'users': sample_users,
+        'images': img_list,
+    }
+    print(sample_users)
+    return render(request, template_name, context)

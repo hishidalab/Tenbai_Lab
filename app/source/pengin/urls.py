@@ -10,4 +10,6 @@ urlpatterns = [
     path('signup/', signupDetaView, name='signup'),
     path('login/', loginDataView, name='login'),
     path('signup_check/', signupCheckView, name='signup_check'),
+    path("product_registra/", ImageUploadView.as_view(), name='product_registra'),
+    path('home/',HomeListView,name='home'),
 ]

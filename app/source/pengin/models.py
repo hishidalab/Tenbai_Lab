@@ -81,7 +81,7 @@ class ImageUpload(models.Model):
     img1 = models.ImageField(upload_to="images")
     img2 = models.ImageField(upload_to="images")
     img3 = models.ImageField(upload_to="images")
-    user = models.CharField(max_length=100)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.title
