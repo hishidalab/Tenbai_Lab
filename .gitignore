@@ -6,6 +6,7 @@ settings_local.py
 __pycache__/
 app/source/config/__pycache__
 app/source/pengin/__pycache__
+app/source/pengin/migrations/__pycache__
 db-volumes/
 db.sqlite3
 docker/mysql/data

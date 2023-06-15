@@ -8,7 +8,8 @@ from django.contrib.auth.forms import UserCreationForm
 class ImageUploadForm(forms.ModelForm):
     class Meta:
         model = ImageUpload
-        fields = "__all__"
+        fields = {'name','mainimg','img1','img2','img3'}
+        labels = {'name':"商品名",'mainimg':"商品メインイメージ",'img1':"サブイメージ1",'img2':"サブイメージ2",'img3':"サブイメージ3"}
 
 class LoginForm(AuthenticationForm):
     fields = {'loginID','password'}
