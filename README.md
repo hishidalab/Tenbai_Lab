@@ -6,6 +6,7 @@
 docker compose up -d
 docker compose exec app /bin/bash
 ./mahou.sh
+python -m pip install Pillow
 python manage.py makemigrations
 python manage.py migrate
 python manage.py runserver 0.0.0.0:8888
