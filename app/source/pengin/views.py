@@ -58,49 +58,6 @@ def signupCheckView(request):
     return render(request, 'pengin/signup_check.html')
 
 
-# def productRegistraView(request):
-#     print(request.method)
-#     if request.method == 'POST':
-#         form = ImageUploadForm(request.POST)
-#         context = {
-#             'form': form,
-#         }
-#         if form.is_valid():  # フォームの値が正しい時
-#             imgup = ImageUpload()
-#             # 'name','mainimg','img1','img2','img3',''
-#             imgup.name = request.POST['name']
-#             imgup.mainimg = request.POST['mainimg']
-#             imgup.img1 = request.POST['img1']
-#             imgup.img2 = request.POST['img2']
-#             imgup.img3 = request.POST['img3']
-#             imgup.user = request.user
-#             imgup.save()
-#             return render('pengin/test.html')
-#     else:
-#         form = ImageUploadForm()
-#         context = {
-#             'form': form,
-#         }
-            
-#     return render(request, 'pengin/product_registra.html', context)
-
-# class productRegistraView(CreateView):
-#     template_name = "pengin/product_registra.html"
-#     form_class = ImageUploadForm
-
-#     def post(self, request):
-#         if request.method == 'POST':
-#             form = ImageUploadForm(request.POST)
-#             if form.is_valid():
-#                 form = form.save(commit=False)
-#                 form.user = request.user
-#                 form.save()
-#                 return render(request, 'pengin/test.html')
-#             else:
-#                 return HttpResponse("フォームが無効です。")  # 無効なフォームの場合の処理
-#         else:
-#             return HttpResponse("無効なリクエストメソッドです。")  # POST 以外のリクエストメソッドの場合の処理
-
 class ImageUploadView(View):
     template_name = 'pengin/product_registra.html'
 
@@ -114,7 +71,7 @@ class ImageUploadView(View):
             image_upload = form.save(commit=False)
             image_upload.user = request.user
             image_upload.save()
-            return redirect('test')  # 保存成功後にリダイレクトするURLを指定してください
+            return redirect('pengin/listing_complete')
         return render(request, self.template_name, {'form': form})
     
 def HomeListView(request):
@@ -126,4 +83,22 @@ def HomeListView(request):
         'images': img_list,
     }
     print(sample_users)
+
+    print(request.method)
+    if request.method == 'POST':
+        for img in img_list:
+            name = img.get('name')
+            nowID = img.get('id')
+            print(name)
+            if name in request.POST:
+                print('ボタン押されたで')
+                print(nowID)
+                # return render()
+        
+        
+
     return render(request, template_name, context)
+
+def ListingCompleteView(request):
+    template_name = "pengin/listing_complete.html"
+    return render(request,template_name)

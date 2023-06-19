@@ -76,7 +76,7 @@ class ImageUpload(models.Model):
     class Meta:
         db_table = 'goods'
     id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=100, unique=True)
     mainimg = models.ImageField(upload_to="images")  # こちらの通り
     img1 = models.ImageField(upload_to="images")
     img2 = models.ImageField(upload_to="images")

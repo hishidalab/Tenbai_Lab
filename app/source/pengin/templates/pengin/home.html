@@ -6,32 +6,36 @@
         <title>Test</title>
     </head>
     <body>
-        {% for obj in users %}
-        <div class="container">
-            <tr>
-            {% if obj.id == request.user.id %}
-            {% if obj.id == request.user.id %}
-            {% else %}
-            {% endif %}
-                <td class="item">{{ obj.name }}</td>
-            {% else %}
-                <td class="item">{{ obj.name }}</td>
-            {% endif %}
+        <form method="post">
+            {% csrf_token %}
+            {% for obj in users %}
+            <div class="container">
+                <tr>
+                {% if obj.id == request.user.id %}
+                {% if obj.id == request.user.id %}
+                {% else %}
+                {% endif %}
+                    <td class="item">{{ obj.name }}</td>
+                {% else %}
+                    <td class="item">{{ obj.name }}</td>
+                {% endif %}
 
 
-            {% for img in images %}
-            {{img.name}}
-            <a href="">
-                <button class="btn btn-outline-secondary rounded-pill btn-sm" type="submit" id="{{ obj.id }}" name="{{ obj.title }}" value="{{ obj.id }}">
-                    <img src="/media_local/{{img.mainimg}}"
-                        class="rounded-pill"
-                        width="50"
-                        height="50"
-                        class="border_radius" alt="送信" />
-                </button>
-            </a>
+                {% for img in images %}
+                {{img.name}}
+                <a href="">
+                    <button class="btn btn-outline-secondary rounded-pill btn-sm" type="submit" id="{{ img.id }}" name="{{ img.name }}" value="{{ img.id }}">
+                        <img src="/media_local/{{img.mainimg}}"
+                            name="{{img.name}}"
+                            class="rounded-pill"
+                            width="50"
+                            height="50"
+                            class="border_radius" alt="送信" />
+                    </button>
+                </a>
+                {% endfor %}
+            </div>
             {% endfor %}
-        </div>
-        {% endfor %}
+        </form>
     </body>
 </html>
