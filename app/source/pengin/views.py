@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from .models import User, ImageUpload
-from .forms import ImageUploadForm, UserForm, LoginForm
+from .forms import ImageUploadForm, UserForm, LoginForm, CommentForm
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
@@ -127,3 +127,48 @@ def HomeListView(request):
     }
     print(sample_users)
     return render(request, template_name, context)
+
+def BuyFormView(request):
+    template_name = "pengin/buy_form.html"
+    sample_users = User.objects.values('id', 'name')
+    img_list = ImageUpload.objects.values('id','name','mainimg','img1','img2','img3','user')
+    context = {
+        'users': sample_users,
+        'images': img_list,
+    }
+    print(sample_users)
+
+    return render(request, template_name, context)
+
+
+# def display_comments(request, thread_id):
+#     #該当する掲示板一件を取得
+#     threads = Thread.objects.filter(pk=thread_id).values()
+#     thread  = threads[0]
+#     username_dicts = User.objects.filter(pk=threads[0]['user_id']).values('username')
+#     thread.update(username_dicts[0])
+#     #該当する掲示板に紐づくコメントを取得
+#     comments = Comment.objects.filter(thread_id=thread_id).values()
+#     count = len(comments)
+#     #コメントのユーザーIDからユーザー名を取得してオブジェクトに追加
+#     for count in range(count):
+#         username_dicts = User.objects.filter(pk=comments[count]['user_id']).values('username')
+#         comments[count].update(username_dicts[0])
+#     #フォーム作成
+#     form = CommentForm()
+#     context = {
+#         'thread': thread,
+#         'comments': comments,
+#         'form': form,
+#     }
+#     return render(request, 'pengin/buy_form.html', context)
+
+def messageView(request):
+    template_name = "pengin/buy_form.html"
+
+    #フォーム作成
+    form = CommentForm
+    context = {
+        'form': form,
+    }
+    return render(request, template_name, {'form': form})
