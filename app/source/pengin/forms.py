@@ -28,3 +28,8 @@ class UserForm(forms.ModelForm):
 # class LoginForm(AuthenticationForm):
 #     class Meta:
 #         fields = "__all__"
+
+class CommentForm(forms.ModelForm):
+    class Meta:
+        model = Comment
+        fields = {'comment'}
