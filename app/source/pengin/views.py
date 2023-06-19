@@ -134,7 +134,7 @@ def BuyFormView(request):
 #     }
 #     return render(request, 'pengin/buy_form.html', context)
 
-def messageView(request):
+def messageView(request, number):
     template_name = "pengin/buy_form.html"
 
     #フォーム作成
