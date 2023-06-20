@@ -23,15 +23,15 @@
 
                 {% for img in images %}
                 {{img.name}}
-                <a href="">
-                    <button class="btn btn-outline-secondary rounded-pill btn-sm" type="submit" id="{{ img.id }}" name="{{ img.name }}" value="{{ img.id }}">
+                <a href="{% url 'pengin:buyaddform' number=img.id %}">
+                    <!-- <button class="btn btn-outline-secondary rounded-pill btn-sm" type="submit" id="{{ img.id }}" name="{{ img.name }}" value="{{ img.id }}"> -->
                         <img src="/media_local/{{img.mainimg}}"
                             name="{{img.name}}"
                             class="rounded-pill"
                             width="50"
                             height="50"
                             class="border_radius" alt="送信" />
-                    </button>
+                    <!-- </button> -->
                 </a>
                 {% endfor %}
             </div>

@@ -7,13 +7,12 @@
     </head>
     <body>
         <h1>販売詳細</h1>
-    
-
         <form method="post" action="{% url 'pengin:buy_form' %}">
+            <input type="hidden" value="{{ number }}" name="number">
             {% csrf_token %}
-            {{ form}}
+            {{ form }}
             <button type="submit" class="positive_button">送信</button>
-        </form>
+        <!-- </form> -->
 
         
     </body>
