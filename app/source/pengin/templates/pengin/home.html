@@ -1,41 +1,41 @@
 <!doctype html>
 <html lang="ja">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Test</title>
-    </head>
-    <body>
-        <form method="post">
-            {% csrf_token %}
-            {% for obj in users %}
-            <div class="container">
-                <tr>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Test</title>
+</head>
+
+<body>
+    <form method="post">
+        {% csrf_token %}
+        {% for obj in users %}
+        <div class="container">
+            <tr>
                 {% if obj.id == request.user.id %}
                 {% if obj.id == request.user.id %}
                 {% else %}
                 {% endif %}
-                    <td class="item">{{ obj.name }}</td>
+                <td class="item">{{ obj.name }}</td>
                 {% else %}
-                    <td class="item">{{ obj.name }}</td>
+                <td class="item">{{ obj.name }}</td>
                 {% endif %}
 
 
                 {% for img in images %}
-                {{img.name}}
-                <a href="">
-                    <button class="btn btn-outline-secondary rounded-pill btn-sm" type="submit" id="{{ img.id }}" name="{{ img.name }}" value="{{ img.id }}">
-                        <img src="/media_local/{{img.mainimg}}"
-                            name="{{img.name}}"
-                            class="rounded-pill"
-                            width="50"
-                            height="50"
-                            class="border_radius" alt="送信" />
+                {{img.name}}<!--商品の名前-->
+                <a href=""> <!--商品の画像-->
+                    <button class="btn btn-outline-secondary rounded-pill btn-sm" type="submit" id="{{ img.id }}"
+                        name="{{ img.name }}" value="{{ img.id }}">
+                        <img src="/media_local/{{img.mainimg}}" name="{{img.name}}" class="rounded-pill" width="50"
+                            height="50" class="border_radius" alt="送信" />
                     </button>
                 </a>
                 {% endfor %}
-            </div>
-            {% endfor %}
-        </form>
-    </body>
+        </div>
+        {% endfor %}
+    </form>
+</body>
+
 </html>
