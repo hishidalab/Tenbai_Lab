@@ -12,6 +12,7 @@ urlpatterns = [
     path('signup_check/', signupCheckView, name='signup_check'),
     path("product_registra/", ImageUploadView.as_view(), name='product_registra'),
     path('home/',HomeListView,name='home'),
-    path('buy_form/<int:number>',messageView,name='buy_form'),
+    path('buyaddform/<int:number>/',BuyFormAddView,name='buyaddform'),
+    path('buy_form/',messageView,name='buy_form'),
     path('product_registra/pengin/listing_complete',ListingCompleteView,name='listing_complete'),
 ]
