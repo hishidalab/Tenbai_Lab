@@ -5,28 +5,22 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Test</title>
-        <script src="{% static 'js/product_registra.js' %}"></script>
         <link rel="stylesheet" href="{% static 'css/product_registra.css' %}">
+        <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
     </head>
     <body>
         <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
-        <!-- {% if id is not None %} -->
-        <!-- <h2>画像が登録されました</h2> -->
-        <!-- <p>画像のIDは {{id}} です</p> -->
-        <!-- {% endif %} -->
-        <!-- <h1>test</h1> -->
-        <!-- <form action="{% url 'pengin:product_registra' %}" method="post"> -->
-        <!-- <form method="POST" enctype="multipart/form-data">
-            {% csrf_token %}  -->
-            <!-- {{ form.as_p }} -->
+            {{form.name}}
             {{form.mainimg}}
             {{form.img1}}
             {{form.img2}}
             {{form.img3}}
-            {{form.name}}
+            
             <button type="submit">送信</button>
             {{form.errors}}
-    </form>
+        </form>
+        
+        <!-- <script src="{% static 'js/product_registra.js' %}"></script> -->
     </body>
 </html>
