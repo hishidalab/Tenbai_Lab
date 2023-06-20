@@ -7,6 +7,7 @@ from django.urls import reverse
 from django.views.generic.edit import CreateView
 from django.shortcuts import render, redirect
 from django.views import View
+from django.views.decorators.csrf import csrf_exempt
 
 def testView(request):
     return render(request, 'pengin/test.html')
@@ -76,23 +77,28 @@ class ImageUploadView(View):
     
 def HomeListView(request):
     template_name = "pengin/home.html"
+    result_url = "pengin/buy_form/"
     sample_users = User.objects.values('id', 'name')
     img_list = ImageUpload.objects.values('id','name','mainimg','img1','img2','img3','user')
     context = {
         'users': sample_users,
         'images': img_list,
     }
-    print(sample_users)
-    print(request.method)
+    # print(sample_users)
+    # print(request.method)
     if request.method == 'POST':
         for img in img_list:
             name = img.get('name')
             nowID = img.get('id')
-            print(name)
+            # print(name)
             if name in request.POST:
                 print('ボタン押されたで')
-                print(nowID)
+                print(type(nowID))
                 # return render()
+                # result = f"/pengin/buy_form/{nowID}"
+                # return redirect(result)
+                # url = reverse('BuyFormView', kwargs={'number': nowID})
+                # return HttpResponseRedirect(url)
     return render(request, template_name, context)
 
 def ListingCompleteView(request):
@@ -100,16 +106,38 @@ def ListingCompleteView(request):
     return render(request,template_name)
 
 def BuyFormView(request):
-    template_name = "pengin/buy_form.html"
+    template_name = "pengin:buy_form"
+    form = CommentForm
     sample_users = User.objects.values('id', 'name')
     img_list = ImageUpload.objects.values('id','name','mainimg','img1','img2','img3','user')
     context = {
+        'form':form,
         'users': sample_users,
         'images': img_list,
     }
     print(sample_users)
 
     return render(request, template_name, context)
+
+def BuyFormAddView(request, number):
+    template_name = "pengin/buy_form.html"
+    form = CommentForm
+    context = {
+        'number':number,
+        'form': form,
+    }
+    return render(request, template_name, context)
+
+def messageView(request):
+    template_name = "pengin:buy_form"
+
+    #フォーム作成
+    form = CommentForm
+    context = {
+    'form': form
+    }
+    return render(request, template_name, {'form':form})
+
 
 
 # def display_comments(request, thread_id):
@@ -134,12 +162,3 @@ def BuyFormView(request):
 #     }
 #     return render(request, 'pengin/buy_form.html', context)
 
-def messageView(request, number):
-    template_name = "pengin/buy_form.html"
-
-    #フォーム作成
-    form = CommentForm
-    context = {
-        'form': form,
-    }
-    return render(request, template_name, {'form': form})
