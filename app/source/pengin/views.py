@@ -131,14 +131,21 @@ def BuyFormAddView(request, number):
 def messageView(request):
     template_name = "pengin:buy_form"
 
-    #フォーム作成
-    form = CommentForm
-    context = {
-    'form': form
-    }
-    return render(request, template_name, {'form':form})
+    if request.method == "POST":  # フォームの入力を終えてすべてのフォームのデータともにviewに戻るとき
+        form = UserForm(request.POST)  # ProfileFormを作る（？）
 
+        if form.is_valid():  # フォームの値が正しい時
+            print('成功')
+            question = form.save(commit=False)
+            return render(request, template_name, {})
 
+    else: #初回アクセス時…空のフォームがほしいとき
+        #フォーム作成
+        form = CommentForm
+        context = {
+            'form': form,
+        }
+        return render(request, template_name, {'form': form})
 
 # def display_comments(request, thread_id):
 #     #該当する掲示板一件を取得
@@ -161,4 +168,3 @@ def messageView(request):
 #         'form': form,
 #     }
 #     return render(request, 'pengin/buy_form.html', context)
-
