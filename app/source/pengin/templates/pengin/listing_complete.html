@@ -7,9 +7,24 @@
     <title>Test</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/test.css' %}">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/header.css' %}">
 </head>
 
 <body>
+    <header>
+        <h1>
+            <img src="/media_local/images/logo.png" alt="">
+            <form method="get" action="#" class="search_container">
+                <input type="text" size="35" placeholder="　キーワード検索"><input type="submit" value="検索">
+            </form>
+        </h1>
+        <ul class="head">
+            <a href="spu.html" class="log">
+                <li>出 品</li>
+            </a>
+        </ul>
+    </header>
     <h1>テストページ</h1>
     <p>ホームは<a href="{% url 'pengin:home' %}">こちら</a></p>
 </body>

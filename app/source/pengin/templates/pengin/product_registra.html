@@ -1,26 +1,44 @@
 {% load static %}
 <!doctype html>
 <html lang="ja">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Test</title>
-        <link rel="stylesheet" href="{% static 'css/product_registra.css' %}">
-        <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
-    </head>
-    <body>
-        <form method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-            {{form.name}}
-            {{form.mainimg}}
-            {{form.img1}}
-            {{form.img2}}
-            {{form.img3}}
-            
-            <button type="submit">送信</button>
-            {{form.errors}}
-        </form>
-        
-        <!-- <script src="{% static 'js/product_registra.js' %}"></script> -->
-    </body>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Test</title>
+    <link rel="stylesheet" href="{% static 'css/product_registra.css' %}">
+    <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/header.css' %}">
+</head>
+
+<body>
+    <header>
+        <h1>
+            <img src="/media_local/images/logo.png" alt="">
+            <form method="get" action="#" class="search_container">
+                <input type="text" size="35" placeholder="　キーワード検索"><input type="submit" value="検索">
+            </form>
+        </h1>
+        <ul class="head">
+            <a href="spu.html" class="log">
+                <li>出 品</li>
+            </a>
+        </ul>
+    </header>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{form.name}}
+        {{form.mainimg}}
+        {{form.img1}}
+        {{form.img2}}
+        {{form.img3}}
+
+        <button type="submit">送信</button>
+        {{form.errors}}
+    </form>
+
+    <!-- <script src="{% static 'js/product_registra.js' %}"></script> -->
+</body>
+
 </html>
