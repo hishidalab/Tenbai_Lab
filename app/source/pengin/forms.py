@@ -12,7 +12,7 @@ class ImageUploadForm(forms.ModelForm):
         labels = {'name':"商品名",'mainimg':"商品メインイメージ",'img1':"サブイメージ1",'img2':"サブイメージ2",'img3':"サブイメージ3"}
 
 class LoginForm(AuthenticationForm):
-    fields = {'loginID','password'}
+    fields = ['loginID', 'password']
     labels = {'loginID':"ログインID",'password':"パスワード"}
 
 class UserForm(forms.ModelForm):

@@ -28,7 +28,7 @@
             {% csrf_token %}
             <p><input type="hidden" name="next" value="{{next}}"></p>
             <!--{{ form.as_p }}-->
-            <div class="form-pas" placeholder="UserID"> {{form.loginID}}</div>
+            <div class="form-pas" placeholder="UserID">{{ form.username }}</div>
             <div class="form-pas" placeholder="Password"> {{form.password}}</div>
             <p><input type="submit" value="LOGIN" class="login-botton"></p>
         </form>
