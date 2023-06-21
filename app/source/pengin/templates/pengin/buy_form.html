@@ -1,21 +1,41 @@
 <!doctype html>
 <html lang="ja">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>詳細</title>
-    </head>
-    <body>
-        <h1>販売詳細</h1>
-        <form method="post" action="{% url 'pengin:buy_form' %}">
-            <input type="hidden" value="{{ number }}" name="number">
-            {% csrf_token %}
-            {{ form }}
-            <button type="submit" class="positive_button">送信</button>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>詳細</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/header.css' %}">
+</head>
+
+<body>
+    <header>
+        <h1><img src="/media_local/images/logo.png" alt="">
+            <form method="get" action="#" class="search_container">
+                <input type="text" size="35" placeholder=" キーワード検索"><input type="submit" value="検索">
+            </form>
+        </h1>
+        <ul class="head">
+            <a href="">
+                <li>マイページ</li>
+            </a>
+            <a href="spu.html" class="log">
+                <li class="syu">出品</li>
+            </a>
+        </ul>
+    </header>
+    <h1>販売詳細</h1>
+    <form method="post" action="{% url 'pengin:buy_form' %}">
+        <input type="hidden" value="{{ number }}" name="number">
+        {% csrf_token %}
+        {{ form }}
+        <button type="submit" class="positive_button">送信</button>
         <!-- </form> -->
 
-        
-    </body>
-</html> 
+
+</body>
+
+</html>
 
 <!-- 〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜 -->
