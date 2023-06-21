@@ -45,7 +45,7 @@ def loginDataView(request):
             user = form.get_user()
             if user:
                 login(request, user)
-            return render(request, 'pengin/test.html', {})
+            return render(request, 'pengin/home.html', {})
         else:
             print('そんな値はないです')
             for ele in form :
@@ -168,3 +168,30 @@ def messageView(request):
 #         'form': form,
 #     }
 #     return render(request, 'pengin/buy_form.html', context)
+
+def mypageView(request):
+    sample_users = User.objects.values('id', 'name','loginID')
+    img_list = ImageUpload.objects.values('id','name','mainimg','img1','img2','img3','user')
+    context = {
+        'img_list':img_list,
+    }
+    
+    myuser = request.user
+    myuser = str(myuser)
+    myuserID = ''
+    print('-----------------------')
+    for user in sample_users:
+        print(type(user.get('loginID')))
+        print(user.get('loginID'))
+        print(type(myuser))
+        print(myuser)
+        if user.get('loginID') == myuser:
+            print('-------if----------------')
+    #         print(user.get('id'))
+    #         print('-----------------------')
+            myuserID=user.get('id')
+            context['ID'] = myuserID
+    # for img in img_list:
+    #     if img.get('user') == myuserID:
+    return render(request, 'pengin/mypage.html',context)
+
