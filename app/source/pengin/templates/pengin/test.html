@@ -7,9 +7,26 @@
     <title>Test</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/test.css' %}">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/header.css' %}">
 </head>
 
 <body>
+    <header>
+        <h1><img src="/media_local/images/logo.png" alt="">
+            <form method="get" action="#" class="search_container">
+                <input type="text" size="35" placeholder=" キーワード検索"><input type="submit" value="検索">
+            </form>
+        </h1>
+        <ul class="head">
+            <a href="">
+                <li>マイページ</li>
+            </a>
+            <a href="spu.html" class="log">
+                <li class="syu">出品</li>
+            </a>
+        </ul>
+    </header>
     <h1>テストページ</h1>
     <p>画像登録は<a href="{% url 'pengin:product_registra' %}">こちら</a></p>
 </body>
