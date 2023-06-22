@@ -5,10 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Test</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/header.css' %}">
 </head>
 
 <body>
     <header>
+
         <h1><img src="./img/typo_logo-b40bf595603dc0e63a5c..svg" alt="">
             <form method="get" action="#" class="search_container">
                 <input type="text" size="35" placeholder="　キーワード検索"><input type="submit" value="検索">
@@ -19,6 +22,7 @@
             </a>
         </ul>
     </header>
+
 
     <form method="post">
         {% csrf_token %}
