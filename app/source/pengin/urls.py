@@ -15,4 +15,5 @@ urlpatterns = [
     path('buyaddform/<int:number>/',BuyFormAddView,name='buyaddform'),
     path('buy_form/',messageView,name='buy_form'),
     path('product_registra/pengin/listing_complete',ListingCompleteView,name='listing_complete'),
+    path('mypage/', mypageView, name='mypage'),
 ]

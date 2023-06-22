@@ -78,9 +78,9 @@ class ImageUpload(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=100, unique=True)
     mainimg = models.ImageField(upload_to="images")  # こちらの通り
-    img1 = models.ImageField(upload_to="images", null=True)
-    img2 = models.ImageField(upload_to="images", null=True)
-    img3 = models.ImageField(upload_to="images", null=True)
+    img1 = models.ImageField(upload_to="images", default='/images/no_image_square.jpg')
+    img2 = models.ImageField(upload_to="images", default='/images/no_image_square.jpg')
+    img3 = models.ImageField(upload_to="images", default='/images/no_image_square.jpg')
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
     def __str__(self):
