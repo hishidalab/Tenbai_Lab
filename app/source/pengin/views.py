@@ -129,23 +129,39 @@ def BuyFormAddView(request, number):
     return render(request, template_name, context)
 
 def messageView(request):
-    template_name = "pengin:buy_form"
+    # template_name = "pengin:buy_form"
+    template_name = "pengin:buyaddform"
+    number = request.POST['number']
+    print(number)
 
-    if request.method == "POST":  # フォームの入力を終えてすべてのフォームのデータともにviewに戻るとき
-        form = UserForm(request.POST)  # ProfileFormを作る（？）
+    form = CommentForm(data=request.POST)
 
-        if form.is_valid():  # フォームの値が正しい時
-            print('成功')
-            question = form.save(commit=False)
-            return render(request, template_name, {})
+    # if request.method == "POST":  # フォームの入力を終えてすべてのフォームのデータともにviewに戻るとき
+    #     form = UserForm(request.POST)  # ProfileFormを作る（？）
+
+    print(form.is_valid())
+
+    if form.is_valid():  # フォームの値が正しい時
+        print('成功')
+        comment = form.save(commit=False)
+        print(request.user)
+        comment.user = request.user
+        thread_number = ImageUpload.objects.get(id=number) 
+        comment.thread = thread_number
+        comment.save()
+        print(thread_number)
+
+        return redirect(template_name, number=number)
+       
+        # return render(request, template_name, context)
 
     else: #初回アクセス時…空のフォームがほしいとき
         #フォーム作成
-        form = CommentForm
         context = {
             'form': form,
         }
-        return render(request, template_name, {'form': form})
+        return render(request, template_name, context)
+
 
 # def display_comments(request, thread_id):
 #     #該当する掲示板一件を取得

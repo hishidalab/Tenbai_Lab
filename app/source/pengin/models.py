@@ -83,8 +83,8 @@ class ImageUpload(models.Model):
     img3 = models.ImageField(upload_to="images", null=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
-    def __str__(self):
-        return self.title
+    # def __str__(self):
+    #     return self.title
 
 # class Thread(models.Model):
 #     goodsid = models.ForeignKey(ImageUpload, on_delete=models.CASCADE)
