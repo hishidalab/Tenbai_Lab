@@ -8,6 +8,8 @@ from django.views.generic.edit import CreateView
 from django.shortcuts import render, redirect
 from django.views import View
 from django.views.decorators.csrf import csrf_exempt
+import string
+import random
 
 def testView(request):
     return render(request, 'pengin/test.html')
@@ -68,9 +70,18 @@ class ImageUploadView(View):
 
     def post(self, request):
         form = ImageUploadForm(request.POST, request.FILES)
+        nowuser = request.user
+        def generate_random_string(length):
+            characters = string.ascii_letters
+            return ''.join(random.choice(characters) for _ in range(length))
+
+        random_string = generate_random_string(8)
+        print(random_string)
+
         if form.is_valid():
             image_upload = form.save(commit=False)
             image_upload.user = request.user
+            image_upload.uniquename = random_string
             image_upload.save()
             return redirect('pengin/listing_complete')
         return render(request, self.template_name, {'form': form})
@@ -79,7 +90,7 @@ def HomeListView(request):
     template_name = "pengin/home.html"
     result_url = "pengin/buy_form/"
     sample_users = User.objects.values('id', 'name')
-    img_list = ImageUpload.objects.values('id','name','mainimg','img1','img2','img3','user')
+    img_list = ImageUpload.objects.values('id','name','subject','price','mainimg','img1','img2','img3','user')
     context = {
         'users': sample_users,
         'images': img_list,
@@ -186,7 +197,7 @@ def messageView(request):
 #     return render(request, 'pengin/buy_form.html', context)
 
 def mypageView(request):
-    sample_users = User.objects.values('id', 'name','loginID')
+    sample_users = User.objects.values('id', 'img1','name','loginID')
     img_list = ImageUpload.objects.values('id','name','mainimg','img1','img2','img3','user')
     context = {
         'img_list':img_list,
