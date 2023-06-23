@@ -43,6 +43,8 @@
         {% for img in images %}
 
         {{img.name}}<!--商品の名前-->
+        {{img.subject}}
+        {{img.price}}
         <a href="{% url 'pengin:buyaddform' img.id %}"> <!--商品の画像-->
             <!-- <button class="btn btn-outline-secondary rounded-pill btn-sm" type="submit" id="{{ img.id }}" -->
                 <!-- name="{{ img.name }}" value="{{ img.id }}"> -->

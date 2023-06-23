@@ -23,7 +23,7 @@
             <a href="">
                 <li>マイページ</li>
             </a>
-            <a href="spu.html" class="log">
+            <a href="{% url 'pengin:product_registra' %}" class="log">
                 <li class="syu">出品</li>
             </a>
         </ul>
@@ -31,6 +31,8 @@
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}
         {{form.name}}
+        {{form.subject}}
+        {{form.price}}
         {{form.mainimg}}
         {{form.img1}}
         {{form.img2}}
