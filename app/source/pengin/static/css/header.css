@@ -55,14 +55,14 @@ header img {
 header .log .syu {
     width: 50px;
     color: #fff;
-    background-color: #FF0060;
+    background-color: #ff0033;
     border-radius: 3px;
     text-align: center;
     font-size: 15px;
 }
 
 header .log .syu:hover {
-    background-color: #ff0062;
+    background-color: #ff0033;
     opacity: 0.5;
 }
 
