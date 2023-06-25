@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Test</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/header.css' %}">
+</head>
+
+<body>
+    <header>
+        <h1><img src="/media_local/images/logo.png" alt="">
+    </header>
+    <div class="pt-4">
+        <h1 class="login-name">商品を削除しました</h1>
+        <p class="botton-top"><a href="{% url 'pengin:mypage' %}" class="login-botton-top">戻る</a></p>
+    </div>
+</body>
+
+</html>
