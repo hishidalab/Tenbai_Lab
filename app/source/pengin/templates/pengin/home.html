@@ -28,7 +28,9 @@
         </ul>
     </header>
 
-
+    <a href="{% url 'pengin:mypage' %}">
+        <li>マイページ</li>
+    </a>
     <form method="post">
         {% csrf_token %}
         <div class="box">

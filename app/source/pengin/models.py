@@ -37,7 +37,7 @@ class UserManager(BaseUserManager):
 class User(AbstractBaseUser):
     class Meta:
         db_table = 'userScertification'
-        
+
     name = models.CharField(max_length=500)
     loginID = models.CharField(max_length=20, unique=True)
     Icon = models.ImageField(upload_to="images", default='/images/no_image_square.jpg')
@@ -105,3 +105,11 @@ class Comment(models.Model):
     updated_datetime = models.DateTimeField(auto_now=True)
     def __str__(self):
         return self.comment
+    
+
+class IconUplodeModel(models.Model):
+    class Meta:
+        db_table = 'Icons'
+    id = models.AutoField(primary_key=True)
+    mainimg = models.ImageField(upload_to="images", default='/images/no_image_square.jpg')
+    user = models.ForeignKey(User, on_delete=models.CASCADE)

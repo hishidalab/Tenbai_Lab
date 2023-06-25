@@ -35,3 +35,8 @@ class CommentForm(forms.ModelForm):
         # fields = {'comment'}
         fields = {'comment': "コメント"}
         # fields = "__all__"
+
+class IconForm(forms.ModelForm):
+    class Meta:
+        model = IconUplodeModel
+        fields = {'mainimg': "アイコン"}
