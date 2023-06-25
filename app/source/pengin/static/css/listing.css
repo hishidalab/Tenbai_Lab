@@ -1,0 +1,50 @@
+.wapp {
+    width: 800px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.top {
+    margin-top: 100px;
+    font-size: 30px;
+}
+
+.wapp .item {
+    width: 418px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+    margin: 50px auto;
+    border: 1px solid;
+    border-radius: 7px;
+    color: #ff0033;
+    background-color: #ff0033;
+    opacity: 0.9;
+    font-size: 20px;
+    font-weight: 200;
+}
+
+.wapp .item:hover {
+    background-color: #ff0033;
+    opacity: 0.7;
+    transition: 0.5s;
+}
+
+.wapp .item .it1 {
+    color: #fff;
+    padding: 21px 139px;
+}
+
+.wapp .item .it2 {
+    color: #fff;
+    padding: 21px 169px;
+}
+
+.wapp p .item2 {
+    color: #285773;
+    text-decoration: none;
+    font-size: 20px;
+}
+
+.wapp p .item2:hover {
+    text-decoration: underline;
+}

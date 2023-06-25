@@ -10,6 +10,8 @@
     <!-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> -->
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/header.css' %}">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/register.css' %}">
 </head>
 
 <body>
@@ -23,24 +25,34 @@
             <a href="">
                 <li>マイページ</li>
             </a>
-            <a href="{% url 'pengin:product_registra' %}" class="log">
-                <li class="syu">出品</li>
-            </a>
         </ul>
     </header>
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{form.name}}
-        {{form.subject}}
-        {{form.price}}
-        {{form.mainimg}}
-        {{form.img1}}
-        {{form.img2}}
-        {{form.img3}}
+    <div class="wapper">
+        <h1>商品の出品</h1>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <p>商品名</p>
+            <div class="itm">{{form.name}}</div>
+            <p>商品の説明</p>
+            <!--<textarea name="" id="id_subject" cols="75" rows="10"></textarea>-->
+            <div class="itm">{{form.subject}}</div>
 
-        <button type="submit">送信</button>
-        {{form.errors}}
-    </form>
+            <p>販売価格</p>
+            <div class="itm-p">
+                <h3 class="en">円</h3>
+                {{form.price}}
+            </div>
+            <p>商品画像<br>※一枚以上選択して下さい</p>
+            <div class="box">
+                <div class="itm2">{{form.mainimg}}</div>
+                <div class="itm2">{{form.img1}}</div>
+                <div class="itm2">{{form.img2}}</div>
+                <div class="itm2">{{form.img3}}</div>
+            </div>
+            <button type="submit">出品する</button>
+            {{form.errors}}
+        </form>
+    </div>
 
     <!-- <script src="{% static 'js/product_registra.js' %}"></script> -->
 </body>

@@ -6,9 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Test</title>
     {% load static %}
-    <link rel="stylesheet" href="{% static 'css/test.css' %}">
-    {% load static %}
     <link rel="stylesheet" href="{% static 'css/header.css' %}">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/listing.css' %}">
 </head>
 
 <body>
@@ -27,8 +27,12 @@
             </a>
         </ul>
     </header>
-    <h1>テストページ</h1>
-    <p>ホームは<a href="{% url 'pengin:home' %}">こちら</a></p>
+    <div class="wapp">
+        <h1 class="top">出品が完了しました！</h1>
+        <p class="item"><a href="{% url 'pengin:product_registra' %}" class="it1">続けて出品する</a></p>
+        <p class="item"><a href="{% url 'pengin:home' %}" class="it2">ホームへ</a></p>
+        <p><a href="{% url 'pengin:mypage' %}" class="item2">マイページを見る</a></p>
+    </div>
 </body>
 
 </html>
