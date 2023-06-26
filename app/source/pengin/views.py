@@ -11,6 +11,8 @@ from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.decorators import login_required
 import string
 import random
+from django.contrib import messages
+from django.db.models import Q
 
 def testView(request):
     return render(request, 'pengin/test.html')
@@ -48,7 +50,8 @@ def loginDataView(request):
             user = form.get_user()
             if user:
                 login(request, user)
-            return render(request, 'pengin/home.html', {})
+            return redirect('pengin:home')
+            # return render(request, 'pengin/home.html', {})
         else:
             print('そんな値はないです')
             for ele in form :
@@ -96,6 +99,7 @@ def HomeListView(request):
         'users': sample_users,
         'images': img_list,
     }
+    
     # print(sample_users)
     # print(request.method)
     if request.method == 'POST':
@@ -267,9 +271,23 @@ class UserUpdateView(View):
             icon = form.save(commit=False)
             icon.user = request.user
             icon.save()
-            return redirect('pengin:listing_complete')
+            return redirect('pengin:mypage')
         return render(request, self.template_name, {'form': form})
 
 
 def derete_check(request):
     return render(request, 'pengin/dereteCheck.html')
+
+def searchDateView(request):
+    image = ImageUpload.objects.order_by('-id')
+    """ 検索機能の処理 """
+    keyword = request.GET.get('keyword')
+
+    if keyword:
+        image = image.filter(
+            Q(name__icontains=keyword)
+        )
+        messages.success(request, '「{}」の検索結果'.format(keyword))
+    else:
+        image = ImageUpload.objects.all()
+    return render(request, 'pengin/home.html', {'image': image })

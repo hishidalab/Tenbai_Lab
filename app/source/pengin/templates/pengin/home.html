@@ -19,18 +19,42 @@
             </form>
         </h1>
         <ul class="head">
-            <a href="">
+            <a href="{% url 'pengin:mypage' %}">
                 <li>マイページ</li>
             </a>
             <a href="{% url 'pengin:product_registra' %}" class="log">
                 <li class="syu">出 品</li>
             </a>
         </ul>
+            <a href="{% url 'pengin:login' %}">
+                <li>ログアウト</li>
+            </a>
     </header>
 
-    <a href="{% url 'pengin:mypage' %}">
+    <form method="GET" action="{% url 'pengin:search' %}">
+        <input type="text" name="keyword">
+        <button type="submit">検索</button>
+        <a href="{% url 'pengin:home' %}" class="log">
+            <li class="syu">戻る</li>
+        </a>
+    </form>
+    <p>検索結果</p>
+    {% for img in image %}
+
+        {{img.name}}
+        <div class="wapper-home">
+            <a href="{% url 'pengin:buyaddform' img.id %}"> <!--商品の画像-->
+                <p class="name">{{img.name}}<!--商品の名前--></p>
+                <p class="price">￥{{img.price}}</p>
+                <img src="/media_local/{{img.mainimg}}" name="{{img.name}}" class="rounded-pill" width="50"
+                    height="50" class="border_radius" alt="送信" />
+            </a>
+        </div>
+    {% endfor %}
+
+    <!-- <a href="{% url 'pengin:mypage' %}">
         <li>マイページ</li>
-    </a>
+    </a> -->
     <form method="post">
         {% csrf_token %}
         <div class="box">
