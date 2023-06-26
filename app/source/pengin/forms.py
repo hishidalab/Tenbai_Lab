@@ -8,8 +8,8 @@ from django.contrib.auth.forms import UserCreationForm
 class ImageUploadForm(forms.ModelForm):
     class Meta:
         model = ImageUpload
-        fields = {'name','mainimg','img1','img2','img3'}
-        labels = {'name':"商品名",'mainimg':"商品メインイメージ",'img1':"サブイメージ1",'img2':"サブイメージ2",'img3':"サブイメージ3"}
+        fields = {'name','subject','price','mainimg','img1','img2','img3'}
+        labels = {'name':"商品名",'subject':'教科名','price':'価格','mainimg':"商品メインイメージ",'img1':"サブイメージ1",'img2':"サブイメージ2",'img3':"サブイメージ3"}
 
 class LoginForm(AuthenticationForm):
     fields = ['loginID', 'password']
@@ -20,8 +20,8 @@ class UserForm(forms.ModelForm):
         model = User
         print(model)
         # fields = "__all__"
-        fields = {'name', 'loginID', 'password'}
-        labels = {'username': "ユーザーネーム",
+        fields = ['name', 'Icon', 'loginID', 'password']
+        labels = {'username': "ユーザーネーム",'Icon':'アイコン',
                 'loginID': "ログインID", 'password': "パスワード"}
         
 
@@ -35,3 +35,8 @@ class CommentForm(forms.ModelForm):
         # fields = {'comment'}
         fields = {'comment': "コメント"}
         # fields = "__all__"
+
+class IconForm(forms.ModelForm):
+    class Meta:
+        model = IconUplodeModel
+        fields = {'mainimg': "アイコン"}

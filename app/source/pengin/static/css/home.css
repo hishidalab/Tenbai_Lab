@@ -1,0 +1,50 @@
+/*box*/
+.box {
+    width: 80%;
+    height: auto;
+    margin: 50px auto;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    row-gap: 80px;
+    column-gap: 20px;
+}
+
+/*wapper-home*/
+.wapper-home {
+    position: relative;
+    width: 300px;
+}
+
+.wapper-home:hover {
+    opacity: 0.7;
+    transition: 0.5s;
+}
+
+.wapper-home .name {
+    position: absolute;
+    font-size: 20px;
+    color: #000;
+    bottom: -30px;
+}
+
+.wapper-home .price {
+    position: absolute;
+    width: 38%;
+    bottom: 12px;
+    left: 0px;
+    font-size: 20px;
+    color: #fff;
+    background-color: #545454;
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
+    opacity: 0.9;
+}
+
+
+/*商品画像*/
+.rounded-pill {
+    width: 230px;
+    height: 230px;
+    border-radius: 5px;
+}

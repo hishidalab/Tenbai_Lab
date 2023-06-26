@@ -1,4 +1,5 @@
 from django.db import models
+import uuid
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager, AbstractUser
 
 class UserManager(BaseUserManager):
@@ -39,6 +40,7 @@ class User(AbstractBaseUser):
 
     name = models.CharField(max_length=500)
     loginID = models.CharField(max_length=20, unique=True)
+    Icon = models.ImageField(upload_to="images", default='/images/no_image_square.jpg')
     createDate = models.DateField(auto_now_add=True)
     active = models.BooleanField(default=True)
     staff = models.BooleanField(default=False)
@@ -76,15 +78,15 @@ class ImageUpload(models.Model):
     class Meta:
         db_table = 'goods'
     id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=100, unique=True)
-    mainimg = models.ImageField(upload_to="images")  # こちらの通り
+    name = models.CharField(max_length=20)
+    uniquename = models.CharField(max_length=100, unique=True)
+    subject = models.CharField(max_length=30)
+    price = models.CharField(max_length=30)
+    mainimg = models.ImageField(upload_to="images")
     img1 = models.ImageField(upload_to="images", default='/images/no_image_square.jpg')
     img2 = models.ImageField(upload_to="images", default='/images/no_image_square.jpg')
     img3 = models.ImageField(upload_to="images", default='/images/no_image_square.jpg')
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-
-    # def __str__(self):
-    #     return self.title
 
 # class Thread(models.Model):
 #     goodsid = models.ForeignKey(ImageUpload, on_delete=models.CASCADE)
@@ -103,3 +105,11 @@ class Comment(models.Model):
     updated_datetime = models.DateTimeField(auto_now=True)
     def __str__(self):
         return self.comment
+    
+
+class IconUplodeModel(models.Model):
+    class Meta:
+        db_table = 'Icons'
+    id = models.AutoField(primary_key=True)
+    mainimg = models.ImageField(upload_to="images", default='/images/no_image_square.jpg')
+    user = models.ForeignKey(User, on_delete=models.CASCADE)

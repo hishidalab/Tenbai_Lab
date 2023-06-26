@@ -1,6 +1,6 @@
 from django.shortcuts import render
-from .models import User, ImageUpload, Comment
-from .forms import ImageUploadForm, UserForm, LoginForm, CommentForm
+from .models import User, ImageUpload,IconUplodeModel,Comment
+from .forms import ImageUploadForm, UserForm, LoginForm, CommentForm,IconForm
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect, HttpResponse
 from django.urls import reverse
@@ -8,6 +8,11 @@ from django.views.generic.edit import CreateView
 from django.shortcuts import render, redirect
 from django.views import View
 from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth.decorators import login_required
+import string
+import random
+from django.contrib import messages
+from django.db.models import Q
 
 def testView(request):
     return render(request, 'pengin/test.html')
@@ -45,7 +50,8 @@ def loginDataView(request):
             user = form.get_user()
             if user:
                 login(request, user)
-            return render(request, 'pengin/home.html', {})
+            return redirect('pengin:home')
+            # return render(request, 'pengin/home.html', {})
         else:
             print('そんな値はないです')
             for ele in form :
@@ -58,7 +64,7 @@ def loginDataView(request):
 def signupCheckView(request):
     return render(request, 'pengin/signup_check.html')
 
-
+# @login_required
 class ImageUploadView(View):
     template_name = 'pengin/product_registra.html'
 
@@ -68,22 +74,32 @@ class ImageUploadView(View):
 
     def post(self, request):
         form = ImageUploadForm(request.POST, request.FILES)
+        nowuser = request.user
+        def generate_random_string(length):
+            characters = string.ascii_letters
+            return ''.join(random.choice(characters) for _ in range(length))
+
+        random_string = generate_random_string(8)
+        print(random_string)
+
         if form.is_valid():
             image_upload = form.save(commit=False)
             image_upload.user = request.user
+            image_upload.uniquename = random_string
             image_upload.save()
             return redirect('pengin/listing_complete')
         return render(request, self.template_name, {'form': form})
-    
+@login_required
 def HomeListView(request):
     template_name = "pengin/home.html"
     result_url = "pengin/buy_form/"
     sample_users = User.objects.values('id', 'name')
-    img_list = ImageUpload.objects.values('id','name','mainimg','img1','img2','img3','user')
+    img_list = ImageUpload.objects.values('id','name','subject','price','mainimg','img1','img2','img3','user')
     context = {
         'users': sample_users,
         'images': img_list,
     }
+    
     # print(sample_users)
     # print(request.method)
     if request.method == 'POST':
@@ -100,11 +116,11 @@ def HomeListView(request):
                 # url = reverse('BuyFormView', kwargs={'number': nowID})
                 # return HttpResponseRedirect(url)
     return render(request, template_name, context)
-
+@login_required
 def ListingCompleteView(request):
     template_name = "pengin/listing_complete.html"
     return render(request,template_name)
-
+@login_required
 def BuyFormView(request):
     template_name = "pengin:buy_form"
     form = CommentForm
@@ -118,7 +134,7 @@ def BuyFormView(request):
     print(sample_users)
 
     return render(request, template_name, context)
-
+@login_required
 def BuyFormAddView(request, number):
     template_name = "pengin/buy_form.html"
     form = CommentForm
@@ -138,7 +154,7 @@ def BuyFormAddView(request, number):
         'user': user
     }
     return render(request, template_name, context)
-
+@login_required
 def messageView(request):
     # template_name = "pengin:buy_form"
     template_name = "pengin:buyaddform"
@@ -195,30 +211,94 @@ def messageView(request):
 #         'form': form,
 #     }
 #     return render(request, 'pengin/buy_form.html', context)
-
+@login_required
 def mypageView(request):
-    sample_users = User.objects.values('id', 'name','loginID')
-    img_list = ImageUpload.objects.values('id','name','mainimg','img1','img2','img3','user')
+    sample_users = User.objects.values('id', 'Icon','name','loginID')
+    img_list = ImageUpload.objects.values('id','name','uniquename','mainimg','img1','img2','img3','user')
+    icon_list = IconUplodeModel.objects.values('id','mainimg','user')
+    
+
     context = {
         'img_list':img_list,
+        'user_list':sample_users,
+        'icon_list':icon_list,
     }
     
     myuser = request.user
     myuser = str(myuser)
     myuserID = ''
-    print('-----------------------')
     for user in sample_users:
-        print(type(user.get('loginID')))
-        print(user.get('loginID'))
-        print(type(myuser))
-        print(myuser)
+        # print(type(user.get('loginID')))
+        # print(user.get('loginID'))
+        # print(type(myuser))
+        # print(myuser)
         if user.get('loginID') == myuser:
-            print('-------if----------------')
-    #         print(user.get('id'))
-    #         print('-----------------------')
             myuserID=user.get('id')
             context['ID'] = myuserID
-    # for img in img_list:
-    #     if img.get('user') == myuserID:
+    
+    if request.method == 'POST':
+        for img in img_list:
+            uniquename = img.get('uniquename')
+            print(uniquename)
+            nowID = img.get('id')
+            print(nowID)
+            # print(name)
+            if uniquename in request.POST:
+                print('ボタン押されたで')
+                print(type(nowID))
+                ImageUpload.objects.get(id=nowID).delete()
+
+                img_list = ImageUpload.objects.values('id','name','uniquename','mainimg','img1','img2','img3','user')
+                context = {
+                    'img_list':img_list,
+                }
+
+                # return render()
+                # result = f"/pengin/buy_form/{nowID}"
+                # return redirect('mypage')
+                # url = reverse('mypage')
+                # return HttpResponseRedirect(url)
+                return render(request, 'pengin/dereteCheck.html')
+    
     return render(request, 'pengin/mypage.html',context)
 
+# @login_required
+class UserUpdateView(View):
+    template_name = 'pengin/Userdataupdate.html'
+
+    def get(self, request):
+        form = IconForm()
+        return render(request, self.template_name, {'form': form})
+
+    def post(self, request):
+        form = IconForm(request.POST, request.FILES)
+        nowuser = request.user
+
+        icon = IconUplodeModel.objects.filter(user=request.user).first()
+        if icon:
+            icon.delete()
+
+        if form.is_valid():
+            icon = form.save(commit=False)
+            icon.user = request.user
+            icon.save()
+            return redirect('pengin:mypage')
+        return render(request, self.template_name, {'form': form})
+
+
+def derete_check(request):
+    return render(request, 'pengin/dereteCheck.html')
+
+def searchDateView(request):
+    image = ImageUpload.objects.order_by('-id')
+    """ 検索機能の処理 """
+    keyword = request.GET.get('keyword')
+
+    if keyword:
+        image = image.filter(
+            Q(name__icontains=keyword)
+        )
+        messages.success(request, '「{}」の検索結果'.format(keyword))
+    else:
+        image = ImageUpload.objects.all()
+    return render(request, 'pengin/home.html', {'image': image })

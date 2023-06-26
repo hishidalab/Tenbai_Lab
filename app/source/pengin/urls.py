@@ -16,4 +16,7 @@ urlpatterns = [
     path('buy_form/',messageView,name='buy_form'),
     path('product_registra/pengin/listing_complete',ListingCompleteView,name='listing_complete'),
     path('mypage/', mypageView, name='mypage'),
+    path('update/', UserUpdateView.as_view(), name='update'),
+    path('derete_check/', derete_check, name='derete_check'),
+    path('search/', searchDateView, name='search'),
 ]

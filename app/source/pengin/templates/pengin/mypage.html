@@ -10,7 +10,30 @@
 
 <body>
     <h1>テストページ</h1>
-    <form method="post">
+    <form method="post" action="{% url 'pengin:mypage' %}">
+        {% csrf_token %}
+        
+        <!-- ここからユーザーアイコンの表示 -->
+        {% for icon in icon_list %}
+            {% if icon.user == ID %}
+                <img src="/media_local/{{icon.mainimg}}" 
+                class="rounded-pill" 
+                width="50">
+            {% else %}
+            {% endif %}
+        {% endfor %}
+
+        <a href="{% url 'pengin:update' %}">アイコンの変更</a>
+
+        <!-- ここからユーザー情報の表示 -->
+        {% for user in user_list %}
+            {% if user.id == ID %}
+                {{user.name}}
+            {% else %}
+            {% endif %}
+        {% endfor %}
+
+        <!-- ここからユーザー商品情報の表示 -->
         {% for img in img_list %}
         {% if img.user == ID %}
         {{img.name}}
@@ -26,10 +49,12 @@
         <img src="/media_local/{{img.img3}}" 
             class="rounded-pill" 
             width="50">
+        <button class="btn btn-outline-secondary rounded-pill btn-sm" type="submit" id="{{ img.id }}" name="{{img.uniquename}}">削除</button>
         {% else %}
         {% endif %}
         {% endfor %}
     </form>
+    <p>ホームは<a href="{% url 'pengin:home' %}">こちら</a></p>
 </body>
 
 </html>
