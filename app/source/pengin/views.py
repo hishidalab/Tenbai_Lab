@@ -50,7 +50,8 @@ def loginDataView(request):
             user = form.get_user()
             if user:
                 login(request, user)
-            return render(request, 'pengin/home.html', {})
+            return redirect('pengin:home')
+            # return render(request, 'pengin/home.html', {})
         else:
             print('そんな値はないです')
             for ele in form :
@@ -270,7 +271,7 @@ class UserUpdateView(View):
             icon = form.save(commit=False)
             icon.user = request.user
             icon.save()
-            return redirect('pengin:listing_complete')
+            return redirect('pengin:mypage')
         return render(request, self.template_name, {'form': form})
 
 
@@ -287,5 +288,6 @@ def searchDateView(request):
             Q(name__icontains=keyword)
         )
         messages.success(request, '「{}」の検索結果'.format(keyword))
-
+    else:
+        image = ImageUpload.objects.all()
     return render(request, 'pengin/home.html', {'image': image })

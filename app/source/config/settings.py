@@ -141,7 +141,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media_local')
 AUTH_USER_MODEL = 'pengin.User'
 
 LOGIN_URL = 'pengin:login' 
-LOGIN_REDIRECT_URL = 'pengin:signup'
+LOGIN_REDIRECT_URL = 'pengin:home'
 LOGOUT_REDIRECT_URL='pengin:login'
 
 ACCOUNT_USER_MODEL_USERNAME_FIELD = None
