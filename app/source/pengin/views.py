@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import User, ImageUpload,IconUplodeModel
+from .models import User, ImageUpload,IconUplodeModel,Comment
 from .forms import ImageUploadForm, UserForm, LoginForm, CommentForm,IconForm
 from django.contrib.auth import authenticate, login, logout
 from django.http import HttpResponseRedirect, HttpResponse
@@ -138,9 +138,20 @@ def BuyFormView(request):
 def BuyFormAddView(request, number):
     template_name = "pengin/buy_form.html"
     form = CommentForm
+    img_list = ImageUpload.objects.values('id','name','mainimg','img1','img2','img3','user')
+    comment = Comment.objects.values('comment', 'user', 'thread')
+    user = User.objects.values('id', 'name', 'loginID', 'createDate', 'active', 'staff', 'admin')
+    # print("~~~~~~~~~~~")
+    # print(comment)
+    # print("--")
+    # print(user)
+    # print("~~~~~~~~~~~")
     context = {
         'number':number,
         'form': form,
+        'image': img_list,
+        'comment': comment,
+        'user': user
     }
     return render(request, template_name, context)
 @login_required
