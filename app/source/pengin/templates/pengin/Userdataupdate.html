@@ -6,17 +6,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Test</title>
     <!-- <link href="{% static '/favicon.ico' %}" rel="icon"> -->
+    <link rel="stylesheet" href="{% static 'css/Userdataupdate.css' %}">
+    <link rel="stylesheet" href="{% static 'css/header.css' %}">
 </head>
 
 <body>
-    <h1>テストページ</h1>
-    <form method="post"  enctype="multipart/form-data">
-        {% csrf_token %}
-        <p>うぇ〜い</p>
-        {{form}}
-        <p class="botton"><input type="submit" class="login-botton" value="登録"></p>
-    </form>
+    <header>
+        <h1><img src="/media_local/images/logo.png" alt="">
+            <form method="get" action="#" class="search_container">
+            </form>
+        </h1>
+        <ul class="head">
+            <a href="">
+                <li>マイページ</li>
+            </a>
+            <a href="{% url 'pengin:product_registra' %}" class="log">
+                <li class="syu">出 品</li>
+            </a>
+        </ul>
+    </header>
+    <div class="container">
+        <div class="form-container">
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <p>画像アップロード</p>
+                <div class="upload-container">
+                    {{ form }}
+                  </div>
+                <p class="botton"><input type="submit" class="login-botton" value="登録"></p>
+            </form>
+        </div>
+    </div>
 </body>
 
 </html>
-

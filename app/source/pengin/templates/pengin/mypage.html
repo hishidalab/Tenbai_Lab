@@ -1,60 +1,66 @@
 {% load static %}
 <!doctype html>
 <html lang="ja">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Test</title>
-    <!-- <link href="{% static '/favicon.ico' %}" rel="icon"> -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Test</title>
+  <link rel="stylesheet" href="{% static 'css/header.css' %}">
+  <link rel="stylesheet" href="{% static 'css/mypage.css' %}">
 </head>
 
 <body>
-    <h1>テストページ</h1>
-    <form method="post" action="{% url 'pengin:mypage' %}">
-        {% csrf_token %}
-        
-        <!-- ここからユーザーアイコンの表示 -->
-        {% for icon in icon_list %}
-            {% if icon.user == ID %}
-                <img src="/media_local/{{icon.mainimg}}" 
-                class="rounded-pill" 
-                width="50">
-            {% else %}
-            {% endif %}
-        {% endfor %}
-
-        <a href="{% url 'pengin:update' %}">アイコンの変更</a>
-
-        <!-- ここからユーザー情報の表示 -->
-        {% for user in user_list %}
-            {% if user.id == ID %}
-                {{user.name}}
-            {% else %}
-            {% endif %}
-        {% endfor %}
-
-        <!-- ここからユーザー商品情報の表示 -->
-        {% for img in img_list %}
-        {% if img.user == ID %}
-        {{img.name}}
-        <img src="/media_local/{{img.mainimg}}" 
-            class="rounded-pill" 
-            width="50">
-        <img src="/media_local/{{img.img1}}" 
-            class="rounded-pill" 
-            width="50">
-        <img src="/media_local/{{img.img2}}" 
-            class="rounded-pill" 
-            width="50">
-        <img src="/media_local/{{img.img3}}" 
-            class="rounded-pill" 
-            width="50">
-        <button class="btn btn-outline-secondary rounded-pill btn-sm" type="submit" id="{{ img.id }}" name="{{img.uniquename}}">削除</button>
-        {% else %}
-        {% endif %}
-        {% endfor %}
-    </form>
+    <header>
+        <h1><img src="/media_local/images/logo.png" alt="">
+            <form method="get" action="#" class="search_container">
+                
+            </form>
+        </h1>
+        <ul class="head">
+            <a href="">
+                <li>マイページ</li>
+            </a>
+            <a href="{% url 'pengin:product_registra' %}" class="log">
+                <li class="syu">出 品</li>
+            </a>
+        </ul>
+    </header>
+  <div class="container">
+    <div class="user-info">
+      <!-- ここからユーザーアイコンの表示 -->
+      {% for icon in icon_list %}
+      {% if icon.user == ID %}
+      <div class="avatar">
+        <img src="/media_local/{{icon.mainimg}}" class="rounded-pill" width="70">
+      </div>
+      <div class="username">{{ user.name }}</div>
+      {% else %}
+      {% endif %}
+      {% endfor %}
+    </div>
+    <div class="avatar-update">
+      <a href="{% url 'pengin:update' %}">アイコンの変更</a>
+    </div>
+    <div class="product-list">
+      <!-- ここからユーザー商品情報の表示 -->
+      {% for img in img_list %}
+      {% if img.user == ID %}
+      <div class="product-info">
+        <div class="image-container">
+          <img src="/media_local/{{ img.mainimg }}" class="rounded-pill" width="50">
+          <img src="/media_local/{{ img.img1 }}" class="rounded-pill hidden" width="50">
+          <img src="/media_local/{{ img.img2 }}" class="rounded-pill hidden" width="50">
+          <img src="/media_local/{{ img.img3 }}" class="rounded-pill hidden" width="50">
+        </div>
+        <div class="img-name">{{ img.name }}</div> <!-- img-nameを画像の下に表示 -->
+        <button class="btn btn-outline-secondary rounded-pill btn-sm" type="submit" id="{{ img.id }}" name="{{ img.uniquename }}">削除</button>
+      </div>
+      {% else %}
+      {% endif %}
+      {% endfor %}
+    </div>
+  </div>
 </body>
 
 </html>
-
