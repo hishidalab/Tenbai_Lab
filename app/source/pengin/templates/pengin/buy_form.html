@@ -17,22 +17,54 @@
             </form>
         </h1>
         <ul class="head">
-            <a href="">
+            <a href="{% url 'pengin:mypage' %}">
                 <li>マイページ</li>
             </a>
             <a href="{% url 'pengin:product_registra' %}" class="log">
                 <li class="syu">出品</li>
             </a>
+            <a href="{% url 'pengin:home' %}" class="log">
+                <li class="syu">ホーム</li>
+            </a>
         </ul>
+
     </header>
     <h1>販売詳細</h1>
+
+    {% for img in image %}
+    {% if number == img.id %}
+
+    <img src="/media_local/{{img.mainimg}}" name="{{img.name}}" class="rounded-pill" width="200" height="200" class="border_radius" alt="送信" />
+    <img src="/media_local/{{img.img1}}" name="{{img.name}}" class="rounded-pill" width="200" height="200" class="border_radius" alt="送信" />
+    <img src="/media_local/{{img.img2}}" name="{{img.name}}" class="rounded-pill" width="200" height="200" class="border_radius" alt="送信" />
+    <img src="/media_local/{{img.img3}}" name="{{img.name}}" class="rounded-pill" width="200" height="200" class="border_radius" alt="送信" />
+
+    {% else %}
+    {% endif %}
+    {% endfor %}
+
+    <br>
+
+    {% for com in comment %}
+    {% if com.thread == number %}
+    {{ com.comment }}
+
+    {% for us in user %}
+    <!-- {% if com.user == us.id %} -->
+    {{ us.name }}
+    <!-- {% endif %} -->
+    {% endfor %}
+
+    <br>
+    {% endif %}
+    {% endfor %}
+
     <form method="post" action="{% url 'pengin:buy_form' %}">
         <input type="hidden" value="{{ number }}" name="number">
         {% csrf_token %}
         {{ form }}
         <button type="submit" class="positive_button">送信</button>
         <!-- </form> -->
-
 
 </body>
 

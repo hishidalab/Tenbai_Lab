@@ -26,7 +26,10 @@
             </a>
         </ul>
     </header>
-  <div class="container">
+    <form method="post" action="{% url 'pengin:mypage' %}">
+        {% csrf_token %}
+        
+        <div class="container">
     <div class="user-info">
       <!-- ここからユーザーアイコンの表示 -->
       {% for icon in icon_list %}
@@ -59,8 +62,10 @@
       {% else %}
       {% endif %}
       {% endfor %}
-    </div>
+      </div>
   </div>
+    </form>
+    <p>ホームは<a href="{% url 'pengin:home' %}">こちら</a></p>
 </body>
 
 </html>
