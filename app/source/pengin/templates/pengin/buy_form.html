@@ -17,13 +17,17 @@
             </form>
         </h1>
         <ul class="head">
-            <a href="">
+            <a href="{% url 'pengin:mypage' %}">
                 <li>マイページ</li>
             </a>
             <a href="{% url 'pengin:product_registra' %}" class="log">
                 <li class="syu">出品</li>
             </a>
+            <a href="{% url 'pengin:home' %}" class="log">
+                <li class="syu">ホーム</li>
+            </a>
         </ul>
+
     </header>
     <h1>販売詳細</h1>
 
