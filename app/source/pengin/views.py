@@ -138,7 +138,7 @@ def BuyFormView(request):
 def BuyFormAddView(request, number):
     template_name = "pengin/buy_form.html"
     form = CommentForm
-    img_list = ImageUpload.objects.values('id','name','mainimg','img1','img2','img3','user')
+    img_list = ImageUpload.objects.values('id','name','uniquename', 'subject', 'price','mainimg','img1','img2','img3','user')
     comment = Comment.objects.values('comment', 'user', 'thread')
     user = User.objects.values('id', 'name', 'loginID', 'createDate', 'active', 'staff', 'admin')
     # print("~~~~~~~~~~~")

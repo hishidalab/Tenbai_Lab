@@ -45,6 +45,20 @@
 
     <br>
 
+    {% for img in image %}
+    {% if img.id == number %}
+    ¥ {{ img.price }}
+    <br>
+    商品説明
+    <br>
+    {{ img.subject }}
+    {% endif %}
+    {% endfor %}
+
+    <br>
+コメント
+<br>
+
     {% for com in comment %}
     {% if com.thread == number %}
     {{ com.comment }}
