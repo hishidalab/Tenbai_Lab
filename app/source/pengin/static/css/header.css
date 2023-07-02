@@ -73,7 +73,7 @@ header .log .syu:hover {
 }
 
 .search_container input[type="text"] {
-    background: #d7d5d5;
+    background: #fdfdfd;
     border: none;
     height: 40px;
 }
@@ -82,11 +82,12 @@ header .log .syu:hover {
     outline: 0;
 }
 
-.search_container input[type="submit"] {
+.search_container button[type="submit"] {
     cursor: pointer;
     font-family: FontAwesome;
     border: none;
-    background: #636363;
+    background: #c7c6c6;
+    border-radius: 6px;
     color: #fff;
     outline: none;
     width: 4.0em;
