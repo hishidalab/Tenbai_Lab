@@ -14,11 +14,18 @@
 <body>
     <header>
         <h1><img src="/media_local/images/logo.png" alt="">
-            <form method="get" action="#" class="search_container">
-                <input type="text" size="35" placeholder="キーワード検索"><input type="submit" value="検索">
+            <form method="GET" action="{% url 'pengin:search' %}">
+                <input type="text" name="keyword" placeholder=" キーワード検索" style="width:200px;height:38px;">
+                <button type="submit" style="width:55px;height:40px;">検索</button>
             </form>
         </h1>
         <ul class="head">
+            <a href="{% url 'pengin:home' %}" class="log">
+                <li>ホーム</li>
+            </a>
+            <a href="{% url 'pengin:login' %}">
+                <li>ログアウト</li>
+            </a>
             <a href="{% url 'pengin:mypage' %}">
                 <li>マイページ</li>
             </a>
@@ -26,35 +33,9 @@
                 <li class="syu">出 品</li>
             </a>
         </ul>
-            <a href="{% url 'pengin:login' %}">
-                <li>ログアウト</li>
-            </a>
     </header>
 
-    <form method="GET" action="{% url 'pengin:search' %}">
-        <input type="text" name="keyword">
-        <button type="submit">検索</button>
-        <a href="{% url 'pengin:home' %}" class="log">
-            <li class="syu">検索前に戻る</li>
-        </a>
-    </form>
-    <p>検索結果</p>
-    {% for img in image %}
-
-        {{img.name}}
-        <div class="wapper-home">
-            <a href="{% url 'pengin:buyaddform' img.id %}"> <!--商品の画像-->
-                <p class="name">{{img.name}}<!--商品の名前--></p>
-                <p class="price">￥{{img.price}}</p>
-                <img src="/media_local/{{img.mainimg}}" name="{{img.name}}" class="rounded-pill" width="50"
-                    height="50" class="border_radius" alt="送信" />
-            </a>
-        </div>
-    {% endfor %}
-
-    <!-- <a href="{% url 'pengin:mypage' %}">
-        <li>マイページ</li>
-    </a> -->
+    <!--ホームの表示-->
     <form method="post">
         {% csrf_token %}
         <div class="box">
@@ -69,8 +50,22 @@
             </div>
             {% endfor %}
         </div>
-
     </form>
+
+    <!--検索結果の表示-->
+    <div class="box">
+        {% for img in image %}
+        <div class="wapper-home">
+            <a href="{% url 'pengin:buyaddform' img.id %}"> <!--商品の画像-->
+                <p class="name">{{img.name}}<!--商品の名前--></p>
+                <p class="price">￥{{img.price}}</p>
+                <img src="/media_local/{{img.mainimg}}" name="{{img.name}}" class="rounded-pill" width="50" height="50"
+                    class="border_radius" alt="送信" />
+            </a>
+        </div>
+        {% endfor %}
+    </div>
+
 </body>
 
 </html>
