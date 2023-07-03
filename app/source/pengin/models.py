@@ -40,7 +40,7 @@ class User(AbstractBaseUser):
 
     name = models.CharField(max_length=500)
     loginID = models.CharField(max_length=20, unique=True)
-    Icon = models.ImageField(upload_to="images", default='/images/no_image_square.jpg')
+    Icon = models.ImageField(upload_to="images", default='/images/no_image_square.jpg', blank=True, null=True)
     createDate = models.DateField(auto_now_add=True)
     active = models.BooleanField(default=True)
     staff = models.BooleanField(default=False)
