@@ -6,15 +6,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>詳細</title>
     {% load static %}
+    <link rel="stylesheet" href="{% static 'css/buy_form.css' %}">
     <link rel="stylesheet" href="{% static 'css/header.css' %}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{% static 'css/buy_form.js' %}"></script>
 </head>
+
 
 <body>
     <header>
-        <h1><img src="/media_local/images/logo.png" alt="">
-            <form method="get" action="#" class="search_container">
-                <input type="text" size="35" placeholder=" キーワード検索"><input type="submit" value="検索">
-            </form>
+        <h1>
+            
+            <a href="{% url 'pengin:home' %}">
+                <img src="/media_local/images/logo.png" alt="">
+              </a>
+          
         </h1>
         <ul class="head">
             <a href="{% url 'pengin:mypage' %}">
@@ -23,65 +29,67 @@
             <a href="{% url 'pengin:product_registra' %}" class="log">
                 <li class="syu">出品</li>
             </a>
-            <a href="{% url 'pengin:home' %}" class="log">
-                <li class="syu">ホーム</li>
-            </a>
+            
         </ul>
-
     </header>
-    <h1>販売詳細</h1>
+    
+    <div class="product-details">
+       
+        
+        <div class="sub-images">
+            {% for img in image %}
+            {% if number == img.id %}
+            <img src="/media_local/{{img.mainimg}}" name="{{img.name}}" class="rounded-pill sub-img" alt="送信">
+            <img src="/media_local/{{img.img1}}" name="{{img.name}}" class="rounded-pill sub-img" alt="送信">
+            <img src="/media_local/{{img.img2}}" name="{{img.name}}" class="rounded-pill sub-img" alt="送信">
+            <img src="/media_local/{{img.img3}}" name="{{img.name}}" class="rounded-pill sub-img" alt="送信">
+            {% endif %}
+            {% endfor %}
+        </div>
+        <div class="image-container">
+            {% for img in image %}
+            {% if number == img.id %}
+            <img src="/media_local/{{img.mainimg}}" name="{{img.name}}" class="rounded-pill main-img" alt="送信">
+            {% endif %}
+            {% endfor %}
+        </div>
 
-    {% for img in image %}
-    {% if number == img.id %}
+        <div class="details">
+            {% for img in image %}
+            {% if img.id == number %}
+            <div class="info-container">
+                <p class="img-name">{{ img.name }}</p>
+                <p class="img-price">¥ {{ img.price }}</p>
+                <p class="comments-title">商品詳細</p>
+                <p class="img-subject">{{ img.subject }}</p>
+            </div>
+            {% endif %}
+            {% endfor %}
 
-    <img src="/media_local/{{img.mainimg}}" name="{{img.name}}" class="rounded-pill" width="200" height="200" class="border_radius" alt="送信" />
-    <img src="/media_local/{{img.img1}}" name="{{img.name}}" class="rounded-pill" width="200" height="200" class="border_radius" alt="送信" />
-    <img src="/media_local/{{img.img2}}" name="{{img.name}}" class="rounded-pill" width="200" height="200" class="border_radius" alt="送信" />
-    <img src="/media_local/{{img.img3}}" name="{{img.name}}" class="rounded-pill" width="200" height="200" class="border_radius" alt="送信" />
+            <div class="comments">
+                <p class="comments-title">商品へのコメント</p>
+                {% for com in comment %}
+                {% if com.thread == number %}
+                <div class="comment">
+                    {% for us in user %}
+                    <p class="username">{{ us.name }}</p>
+                    <p class="usercomment">{{ com.comment }}</p>
+                    {% endfor %}
+                </div>
+                {% endif %}
+                {% endfor %}
+            </div>
 
-    {% else %}
-    {% endif %}
-    {% endfor %}
-
-    <br>
-
-    {% for img in image %}
-    {% if img.id == number %}
-    ¥ {{ img.price }}
-    <br>
-    商品説明
-    <br>
-    {{ img.subject }}
-    {% endif %}
-    {% endfor %}
-
-    <br>
-コメント
-<br>
-
-    {% for com in comment %}
-    {% if com.thread == number %}
-    {{ com.comment }}
-
-    {% for us in user %}
-    <!-- {% if com.user == us.id %} -->
-    {{ us.name }}
-    <!-- {% endif %} -->
-    {% endfor %}
-
-    <br>
-    {% endif %}
-    {% endfor %}
-
-    <form method="post" action="{% url 'pengin:buy_form' %}">
-        <input type="hidden" value="{{ number }}" name="number">
-        {% csrf_token %}
-        {{ form }}
-        <button type="submit" class="positive_button">送信</button>
-        <!-- </form> -->
+            <form method="post" action="{% url 'pengin:buy_form' %}">
+                <input type="hidden" value="{{ number }}" name="number">
+                {% csrf_token %}
+                {{ form.comment }}
+                <button type="submit" class="positive_button">コメントを送信する</button>
+                <!-- </form> -->
+            
+            
+    </div>
 
 </body>
 
 </html>
-
-<!-- 〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜〜 -->

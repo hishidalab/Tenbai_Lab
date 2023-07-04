@@ -1,0 +1,164 @@
+img {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.main-img {
+  width: 500px;
+  height: 500px;
+  margin: 0 auto; /* 画像を水平方向に中央に配置 */
+}
+
+.enlarged-img {
+  width: 500px; /* 任意の大きさに調整してください */
+  height: 500px; /* 任意の大きさに調整してください */
+}
+
+.sub-images {
+  display: flex;
+  flex-direction: column; /* サブ画像を縦に並べる */
+  align-items: flex-start; /* 左寄せにする */
+  margin-left: 300px; /* 画像をさらに右に移動 */
+}
+
+.sub-img {
+  width: 100px;
+  height: 100px;
+  margin-bottom: 20px; /* サブ画像間の余白を増やす */
+}
+
+/* 商品詳細のスタイル */
+.product-details {
+  display: flex;
+  margin-top: 20px;
+}
+
+.image-container {
+  flex: 1;
+}
+
+.details {
+  flex: 1;
+  margin-left: 20px;
+}
+
+.info-container {
+  margin-bottom: 20px;
+}
+
+.img-name {
+  font-size: 25px;
+  font-weight: bold;
+  margin-top: 0;
+  margin-bottom: 10px; /* 商品名と値段の間にスペースを追加 */
+}
+
+.img-price {
+  font-size: 23px;
+  font-weight: bold;
+  margin-bottom: 10px; /* 値段と詳細の間にスペースを追加 */
+}
+
+.img-subject {
+  margin-top: 10px;
+  margin-bottom: 20px; /* 詳細とコメントの間にスペースを追加 */
+}
+
+/* コメントのスタイル */
+.comments-title {
+  font-size: 20px;
+  color: #646565;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.comments {
+  margin-bottom: 20px;
+}
+
+.comment {
+  margin-bottom: 10px;
+}
+
+.username {
+  font-weight: bold;
+}
+.usercomment {
+  background-color: rgb(236, 236, 236);
+  padding: 10px;
+  border-radius: 5px;
+  display: inline-block; /* 行内ブロック要素として表示 */
+  color: inherit; /* 親要素の文字色を継承 */
+}
+
+.form-container {
+  margin-top: 20px;
+}
+
+.positive_button {
+  display: block; /* ブロック要素として表示 */
+  margin-top: 10px;
+  font-size: 18px; /* 任意の大きさに調整してください */
+  padding: 10px 100px; /* 任意のパディングサイズに調整してください */
+  
+}
+header img {
+  width: 100px;
+  margin-right: 20px;
+}
+
+
+/* その他のスタイル */
+h1 {
+  margin-top: 30px;
+  margin-bottom: 10px;
+}
+
+form.search_container {
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.head {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.head a {
+  text-decoration: none;
+  color: black;
+  margin-right: 10px;
+}
+
+.syu {
+  font-weight: bold;
+}
+
+.positive_button {
+  margin-top: 10px;
+}
+
+form button.positive_button {
+  width: 418px;
+  height: 50px;
+  margin-top: 50px;
+  margin-bottom: 200px;
+  font-size: 17px;
+  color: #ff0033;
+  background-color: transparent;
+  border: none;
+  border-radius: 7px;
+  border: 2px solid #ff0033;
+}
+
+form button.positive_button:hover {
+  background-color: #ffdede;
+  opacity: 0.7;
+  transition: 0.5s;
+}
+
+
