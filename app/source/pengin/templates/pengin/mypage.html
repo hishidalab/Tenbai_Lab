@@ -12,11 +12,14 @@
 
 <body>
     <header>
-        <h1><img src="/media_local/images/logo.png" alt="">
+        <h1><a href="{% url 'pengin:home' %}">
+            <img src="/media_local/images/logo.png" alt="">
+          </a>
             <form method="get" action="#" class="search_container">
 
             </form>
         </h1>
+       
         <ul class="head">
             <a href="{% url 'pengin:home' %}" class="log">
                 <li>ホーム</li>
@@ -33,43 +36,43 @@
         {% csrf_token %}
 
         <div class="container">
-            <div class="user-info">
-                <!-- ここからユーザーアイコンの表示 -->
-                {% for icon in icon_list %}
-                {% if icon.user == ID %}
-                <div class="avatar">
-                    <img src="/media_local/{{icon.mainimg}}" class="rounded-pill" width="70">
-                </div>
-                <div class="username">{{ user.name }}</div>
-                {% else %}
-                {% endif %}
-                {% endfor %}
-            </div>
-            <div class="avatar-update">
-                <a href="{% url 'pengin:update' %}">アイコンの変更</a>
-            </div>
-            <div class="product-list">
-                <!-- ここからユーザー商品情報の表示 -->
-                {% for img in img_list %}
-                {% if img.user == ID %}
-                <div class="product-info">
-                    <div class="image-container">
-                        <img src="/media_local/{{ img.mainimg }}" class="rounded-pill" width="50">
-                        <img src="/media_local/{{ img.img1 }}" class="rounded-pill hidden" width="50">
-                        <img src="/media_local/{{ img.img2 }}" class="rounded-pill hidden" width="50">
-                        <img src="/media_local/{{ img.img3 }}" class="rounded-pill hidden" width="50">
-                    </div>
-                    <div class="img-name">{{ img.name }}</div> <!-- img-nameを画像の下に表示 -->
-                    <button class="btn btn-outline-secondary rounded-pill btn-sm" type="submit" id="{{ img.id }}"
-                        name="{{ img.uniquename }}">削除</button>
-                </div>
-                {% else %}
-                {% endif %}
-                {% endfor %}
-            </div>
-        </div>
+
+    <div class="user-info">
+      <!-- ここからユーザーアイコンの表示 -->
+      {% for icon in icon_list %}
+      {% if icon.user == ID %}
+      <div class="avatar">
+        <img src="/media_local/{{icon.mainimg}}" class="rounded-pill" width="70">
+      </div>
+      <div class="username">{{ user.name }}</div>
+      {% else %}
+      {% endif %}
+      {% endfor %}
+    </div>
+    <div class="avatar-update">
+      <a href="{% url 'pengin:update' %}">アイコンの変更</a>
+    </div>
+    <div class="product-list">
+      <!-- ここからユーザー商品情報の表示 -->
+      {% for img in img_list %}
+      {% if img.user == ID %}
+      <div class="product-info">
+        <div class="image-container">
+            <a href="{% url 'pengin:buyaddform' img.id %}"> <!--商品の画像-->
+          <img src="/media_local/{{ img.mainimg }}" class="rounded-pill" width="50">
+        </div></a>
+        <div class="img-name">{{ img.name }}</div> <!-- img-nameを画像の下に表示 -->
+    
+        <button class="btn btn-outline-secondary rounded-pill btn-sm" type="submit" id="{{ img.id }}" name="{{ img.uniquename }}">削除</button>
+      </div>
+      {% else %}
+      {% endif %}
+      {% endfor %}
+      </div>
+  </div>
+
     </form>
-    <p>ホームは<a href="{% url 'pengin:home' %}">こちら</a></p>
+    
 </body>
 
 </html>
