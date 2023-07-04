@@ -18,15 +18,17 @@ def testView(request):
     return render(request, 'pengin/test.html')
 
 def signupDetaView(request):
-    template_name = "back/register.html"
+    template_name = "pengin/signup.html"
     if request.method == "POST":  # フォームの入力を終えてすべてのフォームのデータともにviewに戻るとき
         form = UserForm(request.POST)  # ProfileFormを作る（？）
 
+        print(form.is_valid())
         if form.is_valid():  # フォームの値が正しい時
             print('成功')
             question = form.save(commit=False)  # フォームを保存 ※commit=Falseでまだ保存しない
             # question.user = request.user
             # question = User(loginID = form.changed_data["loginID"])
+            question.Icon
             question.set_password(form.cleaned_data["password"])
             question.save()
 
