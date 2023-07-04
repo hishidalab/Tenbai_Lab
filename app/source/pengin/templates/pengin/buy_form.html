@@ -72,8 +72,10 @@
                 {% if com.thread == number %}
                 <div class="comment">
                     {% for us in user %}
+                    {% if com.user == us.id %}
                     <p class="username">{{ us.name }}</p>
                     <p class="usercomment">{{ com.comment }}</p>
+                    {% endif %}
                     {% endfor %}
                 </div>
                 {% endif %}
