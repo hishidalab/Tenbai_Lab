@@ -28,7 +28,7 @@ def signupDetaView(request):
             question = form.save(commit=False)  # フォームを保存 ※commit=Falseでまだ保存しない
             # question.user = request.user
             # question = User(loginID = form.changed_data["loginID"])
-            question.Icon
+            # question.Icon
             question.set_password(form.cleaned_data["password"])
             question.save()
 
@@ -215,7 +215,7 @@ def messageView(request):
 #     return render(request, 'pengin/buy_form.html', context)
 @login_required
 def mypageView(request):
-    sample_users = User.objects.values('id', 'Icon','name','loginID')
+    sample_users = User.objects.values('id','name','loginID')
     img_list = ImageUpload.objects.values('id','name','uniquename','mainimg','img1','img2','img3','user')
     icon_list = IconUplodeModel.objects.values('id','mainimg','user')
     
