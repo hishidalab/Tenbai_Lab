@@ -80,7 +80,7 @@ class ImageUpload(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=20)
     uniquename = models.CharField(max_length=100, unique=True)
-    subject = models.CharField(max_length=30)
+    subject = models.CharField(max_length=500)
     price = models.IntegerField()
     mainimg = models.ImageField(upload_to="images")
     img1 = models.ImageField(upload_to="images", default='/images/no_image_square.jpg')
