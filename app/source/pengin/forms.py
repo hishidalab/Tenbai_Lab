@@ -20,8 +20,8 @@ class UserForm(forms.ModelForm):
         model = User
         print(model)
         # fields = "__all__"
-        fields = ['name', 'Icon', 'loginID', 'password']
-        labels = {'username': "ユーザーネーム",'Icon':'アイコン',
+        fields = ['name', 'loginID', 'password']
+        labels = {'username': "ユーザーネーム",
                 'loginID': "ログインID", 'password': "パスワード"}
         
 
