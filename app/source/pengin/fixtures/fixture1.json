@@ -1,0 +1,60 @@
+[
+    {
+        "model": "pengin.User",
+        "pk": 1,
+        "fields": {
+            "name": "ペンギン",
+            "loginID": "pengin123",
+            "password": "pengin",
+            "createDate": "2023-07-19"
+        }
+    },
+    {
+        "model": "pengin.User",
+        "pk": 2,
+        "fields": {
+            "name": "アザラシ",
+            "loginID": "Seal",
+            "password": "seal",
+            "createDate": "2023-07-19"
+        }
+    },
+    {
+        "model": "pengin.ImageUpload",
+        "pk": 1,
+        "fields": {
+            "name": "王さまペンギン",
+            "subject": "２番目に大きいペンギンです。",
+            "price": 100000,
+            "mainimg": "images/pengin.png",
+            "img1": "images/pengin.png",
+            "user": 1,
+            "uniquename": "unique_name_1"
+        }
+    },
+    {
+        "model": "pengin.ImageUpload",
+        "pk": 2,
+        "fields": {
+            "name": "この木なんの木気になる木",
+            "subject": "テストデータ２です。",
+            "price": 100,
+            "mainimg": "images/test.jpg",
+            "img1": "images/water.jpg",
+            "user": 1,
+            "uniquename": "unique_name_2"
+        }
+    },
+    {
+        "model": "pengin.Comment",
+        "pk": 1,
+        "fields": {
+            "comment": "素敵なペンギンですね！",
+            "user": 2,
+            "thread": 1,
+            "created_datetime": "2023-07-19T12:34:56+00:00",
+            "updated_datetime": "2023-07-19T12:34:56+00:00"
+        }
+    }
+]
+
