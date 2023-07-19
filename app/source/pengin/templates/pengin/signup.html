@@ -29,6 +29,16 @@
             <p class="botton"><input type="submit" class="login-botton" value="登録"></p>
         </form>
     </div>
+    {% if user_form.errors %}
+        <p>エラーメッセージ</p>
+        <ul>
+            {% for field in user_form %}
+                {% for error in field.errors %}
+                    <li>{{ field.label }}: {{ error }}</li>
+                {% endfor %}
+            {% endfor %}
+        </ul>
+    {% endif %}
 </body>
 
 </html>
