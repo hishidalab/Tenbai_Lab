@@ -3,7 +3,12 @@
 ### 使い方
 ```
 ### 起動時
-docker compose up -d
+#### docker起動
+docker compose up
+#### DB操作時
+bash bin/connect_mysql.sh
+
+####Django起動
 docker compose exec app /bin/bash
 ./mahou.sh
 python -m pip install Pillow
