@@ -79,7 +79,9 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'pengin',
-        'USER': 'root',
+        # 'USER': 'pengin',
+        # 'PASSWORD': '',
+        'USER': 'user',
         'PASSWORD': 'hoge',
         'HOST': 'db',
         'PORT': '3306',

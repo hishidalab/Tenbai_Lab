@@ -35,3 +35,5 @@ class UserAdmin(BaseUserAdmin):
     )
 
 admin.site.register(ImageUpload)
+admin.site.register(Comment)
+admin.site.register(IconUplodeModel)
